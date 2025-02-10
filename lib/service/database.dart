@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database{
   
-  static Database instance = Database();
+  static Database instance = Database._();
+
+  Database._();//สร้างคอนสตรัคเตอร์แบบ private
 
   Future<List> getAllData() async{
     //กำหนดตัวแปรอ้างอิงไปยังข้อมูล

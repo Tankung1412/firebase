@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Database db = Database.instance;
+  Future<List>? productList ;
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +38,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Product List'),
       ),
 
-      body: Container(
-        child: FutureBuilder(
-          future: future, 
-          builder: (context,snapshot){
-            if(snapshot.hasData){
-              return ListView.builder(
-                itemBuilder: itemBuilder
-              );
-              
-            }
+      body: FutureBuilder<List>(
+        future: db.getAllData(), 
+        builder: (context,snapshot){
+          if(snapshot.hasData){
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                  leading: Text(snapshot.data![index].name),
+                  trailing: Text(snapshot.data![index].price),
+                );
+              }
+            );
           }
-          ),
-
+          return Center(child: CircularProgressIndicator(),);
+        }
       ),
     );
   }
