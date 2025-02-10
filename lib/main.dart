@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             );
           }
-          return Center(child: CircularProgressIndicator(),);
+          return const Center(child: CircularProgressIndicator(),);
         }
       ),
     );
